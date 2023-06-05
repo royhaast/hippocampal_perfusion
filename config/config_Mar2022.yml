@@ -1,0 +1,93 @@
+participants_tsv: config/participants.txt
+
+data:
+  bids: data/bids/sub-{subject}
+  gradcorrect: data/gradcorrect/sub-{subject}
+  mp2rage_correction: results/mp2rage_correction/sub-{subject}
+  manual_segs: data/manual_segs/sub-{subject}/anat  
+  preprocessed: data/preprocessed/sub-{subject}
+
+mp2rage_data:
+  T1: 'corrT1_0p3_iso_antsWarped_antsAvg.nii.gz' #'acq-hiresMP2RAGE_run-avg_corrT1_upsamp_0p3_template_reg2TSE.nii.gz'
+  T1w: 'corrUNI_0p3_iso_antsWarped_antsAvg.nii.gz' #'acq-hiresMP2RAGE_run-avg_corrUNI_clean_upsamp_0p3_template_reg2TSE.nii.gz'
+
+sa2rage_data:
+  B1map: 'b1map_in_microT_reg2T1w.nii.gz'
+
+perfusion_data:
+  per_run:
+    PWI: 'data/tar/2022_03/ASL/Individual_Run_Data/sub-{subject}_ses-01_acq-PASL_run-{run}_asl_OxASL_out_perfusion_mean.nii.gz'
+    CBF: 'data/tar/2022_03/ASL/Individual_Run_Data/sub-{subject}_ses-01_acq-PASL_run-{run}_asl_OxASL_out_perfusion_mean_calib.nii.gz'
+    tSNR: 'data/tar/2022_03/ASL/Individual_Run_Data/sub-{subject}_ses-01_acq-PASL_run-{run}_asl_OxASL_out_perfusion_tsnr.nii.gz'
+  full_fit:
+    PWI: 'data/tar/2022_03/ASL/Avg_Run_Data/sub-{subject}_ses-01_acq-PASL_run-avg_asl_OxASL_out_perfusion_mean.nii.gz'
+    CBF: 'data/tar/2022_03/ASL/Avg_Run_Data/sub-{subject}_ses-01_acq-PASL_run-avg_asl_OxASL_out_perfusion_mean_calib.nii.gz'
+    tSNR: 'data/tar/2022_03/ASL/Avg_Run_Data/sub-{subject}_ses-01_acq-PASL_run-avg_asl_OxASL_out_perfusion_tsnr.nii.gz'
+    pveCSF: 'data/tar/2022_03/ASL/Avg_Run_Data/sub-{subject}_ses-01_acq-PASL_PVE_csf.nii.gz'
+    pveGM: 'data/tar/2022_03/ASL/Avg_Run_Data/sub-{subject}_ses-01_acq-PASL_PVE_gm.nii.gz'
+    pveWM: 'data/tar/2022_03/ASL/Avg_Run_Data/sub-{subject}_ses-01_acq-PASL_PVE_wm.nii.gz'
+    M0: 'data/tar/2022_03/ASL/Avg_Run_Data/sub-{subject}_ses-01_acq-PASL_asl_OxASL_out_mzero.nii.gz'
+    Fieldmap: 'data/tar/2022_03/ASL/Avg_Run_Data/sub-{subject}_ses-01_acq-PASL_asl_OxASL_out_Fieldmap_in_Hz.nii.gz'
+  timeseries:
+    DIFF: 'data/tar/2022_12/sub-{subject}_ses-01_asldata_diff.nii.gz'
+
+xfms:
+  TSE: 'ses-01_acq-PASL_asl_OxASL_out_mzero_fslBBReg2TSE.mat'
+  hiresMP2RAGE: 'corrUNI_unbiased_clean_template0_fslBBR-to-TSE.mat' #'fslMoCorr_fslDiCorr_fslTmean_fslBBR-to-highresMP2RAGE.mat'
+  loresMP2RAGE: 'fslMoCorr_fslDiCorr_fslTmean_fslBBR-to-highresMP2RAGE.mat'
+  SA2RAGE: 'gdyreg-to-MP2RAGE.mat'
+
+parameters:
+  - T1
+  - T1w
+  - T2w
+  - myelin
+  - TOF
+  - CBF
+  - PWI
+  # - MEAN
+  - tSNR
+  - pveCSF
+  - pveGM
+  - pveWM
+  - Fieldmap
+  - M0
+  - thickness
+  - gyrification
+  - curvature
+  # - surfdist
+  # - surfdisp
+  # - vesseldistance
+  # - vesseldiameter
+
+# Plotly graphs
+graphs:
+  - vascular_tree_diameter
+  - vascular_tree_fine
+  - vascular_tree_distance_to_seed
+  - vascular_tree_course
+
+# Hippunfold
+hippunfold_dir: /project/6050199/rhaast/99_tmp_scratch_backup/HPC_hippunfold
+template: 
+    hires: resources/img_300umCoronalOblique_hemi-{hemi}.nii.gz
+    lores: resources/img_1500umCoronalOblique_hemi-{hemi}.nii.gz
+autotop: /project/6050199/rhaast/01_Software/HPC_hippunfold/run.py
+autotop_matlab: /project/6050199/rhaast/01_Software/HPC_hippunfold/hippocampal_autotop_ali_dev
+
+# FreeSurfer license
+fs_license: /project/6050199/akhanf/opt/freesurfer/.license
+
+# Paths to Singularity containers
+singularity_neuroglia: /project/6050199/akhanf/singularity/bids-apps/khanlab_neuroglia-core_latest.sif 
+singularity_prepdwi: /project/6050199/akhanf/singularity/bids-apps/khanlab_prepdwi_v0.0.13.sif
+singularity_freesurfer: /project/6050199/akhanf/singularity/bids-apps/pwighton_freesurfer_7.1.0.sif
+singularity_connectomewb: /project/6050199/software/transparentsingularity/connectome-workbench_1.4.1_20191117.simg/connectome-workbench_1.4.1_20191117.simg
+singularity_autotop: /project/6050199/akhanf/singularity/bids-apps/khanlab_autotop_deps_latest.sif
+singularity_fmriprep: /project/6050199/akhanf/singularity/bids-apps/poldracklab_fmriprep_20.2.0.sif
+singularity_braincharter: /project/6050199/rhaast/01_Software/singularity/braincharter_v0.2.simg 
+
+# Matlab
+matlab_bin: '/cvmfs/restricted.computecanada.ca/easybuild/software/2017/Core/matlab/2019b/bin/matlab'
+mlm_license_file: '/cvmfs/restricted.computecanada.ca/config/licenses/matlab/inst_uwo/graham.lic'
+java_home: '/cvmfs/soft.computecanada.ca/easybuild/software/2017/Core/java/1.8.0_192/'

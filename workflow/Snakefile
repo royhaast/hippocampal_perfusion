@@ -1,0 +1,117 @@
+import os
+from os.path import join
+from glob import glob
+import pandas as pd
+import numpy as np
+
+configfile: 'config/config_Mar2022.yml'
+
+#load participants.tsv file (list of HCP subject IDs),
+df = pd.read_csv(config['participants_tsv'], dtype=str)
+subjects = df.participant_id.to_list() 
+subjects = [str(s).zfill(1) for s in subjects]
+# subjects = ['01'] #,'01','02','03','04','05','06','07','08','09','10','11']
+
+#runs=[str(r).zfill(1) for r in range(1,9)]
+runs = [str(r) for r in range(1,9)]
+
+wildcard_constraints:
+    subject="[0-9]+",
+    asl_parameter="CBF|PWI|tSNR|DIFF|pveCSF|pveGM|pveWM|M0|Fieldmap",
+    mp2rage_parameter="T1|T1w",
+    tof_parameter="vesseldistance|vesseldiameter",
+    surfname='white|pial|sphere.reg',
+    H="Lflip|R"
+
+#environmental variables
+os.environ[ "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS" ] = "4"
+
+# Hippocampus 
+# rule all:
+    # input:
+#         expand('results/autotop-dev/results/sub-{subject}/anat/sub-{subject}_space-T1w_desc-subfields_modality-segT2w_template-CITI168_dseg.nii.gz', subject=subjects),
+#         expand('results/surface_warps/sub-{subject}/{H}/{surface}.native.surf.gii', subject=subjects, H=['Lflip','R'], surface=['inner','midthickness','outer']),
+#         expand('results/surface_warps/sub-{subject}/{H}/{surface}.downsampled.native.surf.gii', subject=subjects, H=['Lflip','R'], surface=['midthickness']),
+#         expand('results/average_hippocampus/{surface}_hemi-{H}.native.surf.gii', H=['Lflip','R'], surface=['inner','midthickness','outer']),
+#         expand('results/hcp_mmp/sub-{subject}/{hemi}.hcp-mmp.nii.gz', subject=subjects, hemi=['lh','rh'])
+
+# Perfusion mapping
+rule all:
+    input:
+        # Full fit
+        #expand(
+        #    'results/surface_maps/sub-{subject}/sub-{subject}_tpl-lores_{asl_parameter}_{H}.native.shape.gii',
+        #    subject=subjects, asl_parameter=config['perfusion_data']['full_fit'].keys(), H=['Lflip','R']
+        #),
+        # Cortical
+        expand(
+            'results/surface_maps/sub-{subject}/sub-{subject}_hemi-{hemi}_CBF.32k_fs_LR.shape.gii',
+            subject=subjects, hemi=['lh','rh']
+        ),
+        # Run-wise
+        #expand(
+        #    'results/surface_maps/sub-{subject}/run-{run}/sub-{subject}_run-{run}_tpl-lores_{asl_parameter}_{H}.native.shape.gii',
+        #    subject=subjects, asl_parameter=['CBF','PWI','tSNR'], H=['Lflip','R'], run=range(1,9)
+        #)
+#         expand('results/maps/sub-{subject}/sub-{subject}_PWI_{H}.nii.gz', subject=subjects, H=['Lflip','R']),
+#         expand('results/maps/sub-{subject}/run-{run}/sub-01_run-{run}_PWI_{H}.nii.gz', subject=subjects, run=range(1,9), H=['L','R'])
+#         expand('results/surface_maps/group/sub-group_tSNR_LR_avg.native.shape.gii'),
+#         expand('results/surface_maps/sub-{subject}/sub-{subject}_{asl_parameter}_{H}.native.shape.gii', subject=subjects, asl_parameter=config['perfusion_data']['per_run'].keys(), H=['Lflip','R']),
+#        expand('results/surface_maps/sub-{subject}/run-{run}/sub-{subject}_run-{run}_{asl_parameter}_{H}.native.shape.gii', subject=subjects, run=runs, asl_parameter=config['perfusion_data']['per_run'].keys(), H=['Lflip','R']),
+#         expand('results/surface_maps/sub-{subject}/sub-{subject}_run-concat_DIFF_{H}.native.shape.gii', subject=subjects, H=['Lflip','R'])
+#         expand('results/surface_maps/sub-{subject}/sub-{subject}_hemi-{H}_PWI.32k_fs_LR.shape.gii',  subject=subjects, H=['lh','rh'])
+#         expand('results/surface_maps/sub-{subject}/full_fit/sub-{subject}_DIFF_{H}.native.shape.gii', subject=subjects, H=['Lflip','R'])
+
+# TOF
+#rule all:
+#     input:
+#         expand('results/vasculature/sub-{subject}/{H}/vessel_seg_{scale}_bin_diameters_clean_dil.nii.gz', subject=subjects, H=['Lflip','R'], scale=['1p0','0p7','0p5']),
+#         expand('results/vasculature/sub-{subject}/{H}/sub-{subject}_{H}_vascular_tree.html', subject=subjects, H=['Lflip','R']),
+#         expand('visualization/plotly_graphs/sub-{subject}/sub-{subject}_{H}_{graph}.pdf', subject=subjects, H=['Lflip','R'], graph=config['graphs'])
+
+# Group surface maps
+# rule all:
+    # input:
+        # expand(
+        #     'results/surface_maps/group/sub-group_{tpl_res}{asl_parameter}_LR_avg.native.shape.gii',
+        #     asl_parameter=config['perfusion_data']['full_fit'].keys(),
+        #     tpl_res=['tpl-lores_']
+        # )
+        # expand('results/surface_maps/group/sub-group_{parameter}_LR_avg.native.shape.gii', parameter=config['parameters']),
+        # expand('results/surface_maps/group/sub-group_{mp2rage}_LR_avg.native.shape.gii', morphology=mp2rage_parameters),
+        # expand('results/surface_maps/group/sub-group_{tof}_LR_avg.native.shape.gii', tof=['vesseldistance','vesseldiameter']),
+        # expand('results/surface_maps/group/sub-group_B1map_LR_avg.native.shape.gii'),
+        # expand('results/surface_maps/group/sub-group_myelin_LR_avg.native.shape.gii'),
+        # expand('results/surface_maps/group/sub-group_{morphology}_LR_avg.native.shape.gii', morphology=['gyrification','curvature','thickness'])
+
+def collect_input(wildcards):
+    subject = '{wildcards.subject}'.format(wildcards=wildcards)
+    deriv = config['data']['mp2rage_correction']
+
+    return {
+        'inv1': join(deriv,'anat/sub-{s}_acq-MP2RAGE_inv-1_part-mag_run-01.nii.gz'.format(s=subject)),
+        'inv2': join(deriv,'anat/sub-{s}_acq-MP2RAGE_inv-2_part-mag_run-01.nii.gz'.format(s=subject)),
+        't1': join(deriv,'anat/sub-{s}_acq-MP2RAGE_run-01_corrT1_clean.nii.gz'.format(s=subject)),
+        't1w': join(deriv,'anat/sub-{s}_acq-MP2RAGE_run-01_corrUNI_clean.nii.gz'.format(s=subject))
+        }
+
+# Common rules for mapping operations
+include: 'rules/common.smk'
+
+# Will do MP2RAGE B1+ correction, MPRAGEise, skullstripping, 
+# standard FreeSurfer and prepare for mapping onto hippocampus
+include: 'rules/mp2rage.smk'
+include: 'rules/hcp-mmp.smk'
+
+# Unfold hippocampus
+include: 'rules/autotop.smk'
+include: 'rules/surfaces.smk'
+include: 'rules/t2w.smk'
+
+# Will prepare other data for mapping onto hippocampus 
+include: 'rules/perfusion.smk'
+include: 'rules/tof.smk'
+include: 'rules/sa2rage.smk'
+
+# Extract morphological features
+include: 'rules/morphology.smk'
