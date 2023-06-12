@@ -2,7 +2,7 @@ participants_tsv: config/participants.txt
 
 data:
   bids: data/bids/sub-{subject}
-  gradcorrect: data/gradcorrect/sub-{subject}
+  gradcorrect: data/deriv/gradcorrect/sub-{subject}
   mp2rage_correction: results/mp2rage_correction/sub-{subject}
   manual_segs: data/manual_segs/sub-{subject}/anat  
   preprocessed: data/preprocessed/sub-{subject}
@@ -57,8 +57,8 @@ parameters:
   - curvature
   # - surfdist
   # - surfdisp
-  # - vesseldistance
-  # - vesseldiameter
+  - vesseldistance
+  - vesseldiameter
 
 # Plotly graphs
 graphs:

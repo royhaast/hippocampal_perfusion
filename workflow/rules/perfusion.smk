@@ -60,13 +60,13 @@ rule sample_perf_hippocampus_per_run:
         fi
         """
         
-# rule reduce_nii_across_runs:
-#     input: expand('results/maps/sub-{{subject}}/run-{run}/sub-{{subject}}_run-{run}_tpl-{tpl_res}_{{asl_parameter}}_{{H}}.nii.gz', run=range(1,9)),
-#     output: 'results/maps/sub-{subject}/sub-{subject}_tpl-{tpl_res}_{asl_parameter}_{H}.nii.gz'
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_prepdwi']   
-#     shell:
-#         "AverageImages 3 {output} 0 {input}"  
+rule reduce_nii_across_runs:
+    input: expand('results/maps/sub-{{subject}}/run-{run}/sub-{{subject}}_run-{run}_tpl-{tpl_res}_{{asl_parameter}}_{{H}}.nii.gz', run=range(1,9)),
+    output: 'results/maps/sub-{subject}/sub-{subject}_tpl-{tpl_res}_{asl_parameter}_{H}.nii.gz'
+    group: 'map_perfusion_hpc'
+    singularity: config['singularity_prepdwi']   
+    shell:
+        "AverageImages 3 {output} 0 {input}"  
 
 # Then process full fit first 
 rule warp_perf_to_corobl_crop_full_fit:
@@ -114,42 +114,6 @@ rule sample_perf_hippocampus_full_fit:
                 -trilinear
         fi
         """
-
-
-
-
-
-# # Map onto surface per run, then average across runs in surface space
-# rule sample_perf_hippocampus_per_run:
-#     input:
-#         nii = 'results/maps/sub-{subject}/run-{run}/sub-{subject}_run-{run}_{asl_parameter}_{H}.nii.gz',
-#         inner = 'results/surface_warps/sub-{subject}/{H}/inner.native.surf.gii',
-#         midthickness = 'results/surface_warps/sub-{subject}/{H}/midthickness.native.surf.gii',
-#         outer = 'results/surface_warps/sub-{subject}/{H}/outer.native.surf.gii',
-#         ribbon = rules.extract_gm_ribbon.output,
-#     output: 'results/surface_maps/sub-{subject}/run-{run}/sub-{subject}_run-{run}_{asl_parameter}_{H}.native.shape.gii'
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_connectomewb']   
-#     shell:
-#         "wb_command -volume-to-surface-mapping {input.nii} {input.midthickness} {output} -ribbon-constrained {input.outer} {input.inner} -volume-roi {input.ribbon}"
-
-# rule merge_gii_across_runs:
-#     input: expand('results/surface_maps/sub-{{subject}}/run-{run}/sub-{{subject}}_run-{run}_{{asl_parameter}}_{{H}}.native.shape.gii', run=['01','02','03','04','05','06','07','08']),
-#     output: 'results/surface_maps/sub-{subject}/sub-{subject}_run-concat_{asl_parameter}_{H}.native.shape.gii'
-#     params:
-#         merge_cmd = construct_merge_cmd    
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_connectomewb']   
-#     shell:
-#         "{params.merge_cmd}"
-
-# rule reduce_gii_across_runs:
-#     input: 'results/surface_maps/sub-{subject}/sub-{subject}_run-concat_{asl_parameter}_{H}.native.shape.gii'
-#     output: 'results/surface_maps/sub-{subject}/sub-{subject}_run-avg_{asl_parameter}_{H}.native.shape.gii'
-#     singularity: config['singularity_connectomewb']
-#     group: 'map_perfusion_hpc'      
-#     shell:
-#         "wb_command -metric-reduce {input} MEAN {output} -only-numeric"
 
 # Now for ASL difference timeseries, per run and concatenate
 rule split_timeseries:
@@ -236,89 +200,6 @@ rule concatenate_perf_hippocampus_timeseries_gii:
     shell:
         "{params.merge_cmd}"    
 
-
-# rule merge_timeseries:
-#     input: 'results/maps/sub-{subject}/full_fit/tse/{hemi}/sub-{subject}_vol0000.nii.gz' 
-#     output: 'results/maps/sub-{subject}/full_fit/tse/{hemi}/sub-{subject}_DIFF_{hemi}.nii.gz' 
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_prepdwi']
-#     threads: 8
-#     resources:
-#         mem_mb = 32000              
-#     shell:
-#         """
-#         out_dir=`dirname {output}`
-#         fslmerge -t {output} `ls $out_dir/*.nii.gz`
-#         """  
-
-# rule warp_perf_to_corobl_crop_timeseries:
-#     input:
-#         nii = 'results/maps/sub-{subject}/full_fit/native/sub-{subject}_run-{run}_vol0000.nii.gz', 
-#         xfm2tse = 'results/maps/sub-{subject}/run-{run}/sub-{subject}_run-{run}_from-ASL-to-TSE_type-itk_xfm.txt',
-#         xfm2ref = 'data/manual_segs/sub-{subject}/anat/sub-{subject}_acq-TSE_0p3_template0_from-dseg_to-refT2w_type-itk_xfm.txt',
-#         xfm2crop = 'results/autotop-dev/work/sub-{subject}/anat/sub-{subject}_desc-affine_from-T2w_to-CITI168corobl_type-itk_xfm.txt',
-#         ref = join(config['hippunfold_dir'],config['template'])
-#     output: 'results/maps/sub-{subject}/run-{run}/tse/{hemi}/sub-{subject}_run-{run}_vol0000.nii.gz'
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_prepdwi']       
-#     shell:
-#         """
-#         hemi={wildcards.hemi}
-#         in_dir=`dirname {input.nii}`
-#         out_dir=`dirname {output}`
-#         for file in $in_dir/*.nii.gz ; do
-#             out_file=`basename $file`
-#             antsApplyTransforms -d 3 --interpolation Linear -i $file -o $out_dir/$out_file -r {input.ref}  -t {input.xfm2crop} -t {input.xfm2ref} -t {input.xfm2tse} ; 
-#         done
-#         """
-
- 
-
-# # Prepare individual ASL runs for mapping on unfolded hippocampus
-# rule warp_run_mean_to_corobl_crop:
-#     input:
-#         nii = 'results/perfusion_sdc/sub-{subject}/sub-{subject}_acq-ASL_run-{run}_moCorr_sDC_PWI_Tmean.nii.gz',
-#         xfm2anat = 'results/perfusion_sdc/sub-{subject}/sub-{subject}_M0-to-MP2RAGE_BBR_fsl2greedy2ants_Apply1st.txt',
-#         xfm2tse = 'results/perfusion_sdc/sub-{subject}/sub-{subject}_MP2RAGE-to-TSE_final_greedy2ants_Apply2nd.txt',
-#         xfm2ref = 'data/manual_segs/sub-{subject}/anat/sub-{subject}_acq-TSE_0p3_template0_from-dseg_to-refT2w_type-itk_xfm.txt',
-#         xfm2crop = 'results/autotop-dev/work/sub-{subject}/anat/sub-{subject}_desc-affine_from-T2w_to-CITI168corobl_type-itk_xfm.txt',
-#         ref = join(config['hippunfold_dir'],config['template'])
-#     output: 'results/perfusion_preprocessing/sub-{subject}/sub-{subject}_run-{run}_mean_{hemi}.nii.gz'
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_prepdwi']   
-#     shell:
-#         "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS={threads} "
-#         "antsApplyTransforms -d 3 --interpolation Linear -i {input.nii} -o {output} -r {input.ref}  -t {input.xfm2crop} -t {input.xfm2ref} -t {input.xfm2tse} -t {input.xfm2anat}"
-
-# rule lr_flip_run_mean:
-#     input: 'results/perfusion_preprocessing/sub-{subject}/sub-{subject}_run-{run}_mean_L.nii.gz'
-#     output: 'results/perfusion_preprocessing/sub-{subject}/sub-{subject}_run-{run}_mean_Lflip.nii.gz'
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_prepdwi']
-#     shell:
-#         "c3d {input} -flip x -o  {output}"
-
-# rule merge_run_means:
-#     input: expand('results/perfusion_preprocessing/sub-{{subject}}/sub-{{subject}}_run-{run}_mean_{{H}}.nii.gz', run=[str(r).zfill(2) for r in range(1,9)])
-#     output: 'results/maps/sub-{subject}/sub-{subject}_PWI_means_{H}.nii.gz'
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_prepdwi']
-#     shell:
-#         "fslmerge -t {output} {input}"    
-
-# rule sample_run_means_hippocampus:
-#     input:
-#         nii = 'results/maps/sub-{subject}/sub-{subject}_PWI_means_{H}.nii.gz',
-#         ribbon = rules.extract_gm_ribbon.output,
-#         inner = 'results/surface_warps/sub-{subject}/{H}/inner.native.surf.gii',
-#         midthickness = 'results/surface_warps/sub-{subject}/{H}/midthickness.native.surf.gii',
-#         outer = 'results/surface_warps/sub-{subject}/{H}/outer.native.surf.gii',
-#     output: 'results/surface_maps/sub-{subject}/sub-{subject}_PWI_means_{H}.native.shape.gii'
-#     group: 'map_perfusion_hpc'
-#     singularity: config['singularity_connectomewb']   
-#     shell:
-#         "wb_command -volume-to-surface-mapping {input.nii} {input.midthickness} {output} -ribbon-constrained {input.outer} {input.inner} -volume-roi {input.ribbon}"
-
 # Transform ASL data to lores MP2RAGE for cortical analyses
 rule warp_perf_to_anatomy:
     input:
@@ -347,4 +228,3 @@ rule sample_perf_cortex:
         """           
         wb_command -volume-to-surface-mapping {input.nii} {input.midthickness} {output} -trilinear        
         """
-

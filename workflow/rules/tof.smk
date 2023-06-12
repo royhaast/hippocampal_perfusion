@@ -15,6 +15,7 @@ rule warp_tof_to_corobl_crop:
         "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS={threads} "
         "antsApplyTransforms -d 3 --interpolation Linear -i {input.nii} -o {output} -r {input.ref}  -t {input.xfm} -t {input.init}"
 
+# Flip left hemisphere
 rule lr_flip_tof:
     input: 'results/maps/sub-{subject}/sub-{subject}_TOF_L.nii.gz'
     output: 'results/maps/sub-{subject}/sub-{subject}_TOF_Lflip.nii.gz'
@@ -23,6 +24,7 @@ rule lr_flip_tof:
     shell:
         "c3d {input} -flip x -o  {output}"
 
+# Sample TOF volume onto unfolded hippocampal surface
 rule sample_tof_hippocampus:
     input:
         nii = 'results/maps/sub-{subject}/sub-{subject}_TOF_{H}.nii.gz',
@@ -51,6 +53,7 @@ rule tof_n4_correction:
     shell:
         "N4BiasFieldCorrection -d 3 -i {input} -o {output}"    
 
+# Apply smoothing
 rule tof_stedi_filter:
     input: rules.tof_n4_correction.output
     output: 'results/vasculature/sub-{subject}/{H}/sub-{subject}_TOF_{H}_n4_stedi.nii.gz'
@@ -62,6 +65,7 @@ rule tof_stedi_filter:
     shell:
         "bash scripts/tof_filter.sh {input}"      
 
+# Extract vessels 
 rule tof_extract_vessels:
     input: rules.tof_stedi_filter.output
     output: 'results/vasculature/sub-{subject}/{H}/sub-{subject}_TOF_{H}_n4_stedi_centerdia_clean.nii.gz'
@@ -131,6 +135,7 @@ rule sample_angiograms_hippocampus:
     shell:
         "wb_command -volume-to-surface-mapping {input.nii} {input.midthickness} {output} -ribbon-constrained {input.outer} {input.inner} -volume-roi {input.ribbon}"
 
+# Run vasculature analyes
 rule generate_notebooks:
     input:
         xml = 'results/vasculature/sub-{subject}/{H}/vascular_tree.xml',
@@ -145,6 +150,7 @@ rule generate_notebooks:
     shell:
         "bash {params.script} {wildcards.subject} {wildcards.H} {output} {input.notebook}"
 
+# Convert output graphs to PDF
 rule convert_graphs_pdf:
     input:
         notebook = 'results/vasculature/sub-{subject}/{H}/sub-{subject}_{H}_vascular_tree.html',

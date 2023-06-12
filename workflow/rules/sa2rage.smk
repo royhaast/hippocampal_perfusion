@@ -1,3 +1,4 @@
+# Convert FreeSurfer T1 to Nifti
 rule mri_convert_freesurfer:
     input: 
         unpack(collect_input),
@@ -8,6 +9,7 @@ rule mri_convert_freesurfer:
     shell:
         "mri_convert {input.t1w} {output} -nc -rl {input.fs}" 
 
+# Coregister lores MP2RAGE to hires MP2RAGE
 rule coregister_lores_mp2rage:
     input:
         src = 'results/freesurfer/sub-{subject}/mri/T1.nii.gz',
@@ -21,6 +23,7 @@ rule coregister_lores_mp2rage:
     shell:   
         "reg_aladin -flo {input.src} -ref {input.ref} -aff {output.xfm} -rigOnly -nac"
 
+# Convert transforms to correct format
 rule convert_ras_xfm_sa2rage:
     input:
         xfm = 'results/maps/sub-{subject}/sub-{subject}_from-loresMP2RAGE-to-hiresMP2RAGE_type-ras_xfm.txt',    
@@ -33,6 +36,7 @@ rule convert_ras_xfm_sa2rage:
     shell:
         "c3d_affine_tool {input.xfm} -oitk {output}"
 
+# Single transform B1+ map to coronal oblique space
 rule warp_b1map_to_corobl_crop:
     input:
         nii = lambda wildcards: 'data/preprocessed/sub-{subject}/SA2RAGE/sub-{subject}_acq-SA2RAGE_{file}'.format(
@@ -52,6 +56,7 @@ rule warp_b1map_to_corobl_crop:
         "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS={threads} "
         "antsApplyTransforms -d 3 --interpolation Linear -i {input.nii} -o {output} -r {input.ref} -t {input.xfm2crop} -t {input.xfm2ref} -t {input.xfm2tse} -t {input.xfm2hires}" 
 
+# Flip left hemisphere
 rule lr_flip_b1map:
     input: 'results/maps/sub-{subject}/sub-{subject}_B1map_L.nii.gz',
     output: 'results/maps/sub-{subject}/sub-{subject}_B1map_Lflip.nii.gz',
@@ -60,6 +65,7 @@ rule lr_flip_b1map:
     shell:
         "c3d {input} -flip x -o  {output}"
 
+# Sample onto unfolded hippocampal surface
 rule sample_b1map_hippocampus:
     input:
         nii = 'results/maps/sub-{subject}/sub-{subject}_B1map_{H}.nii.gz',

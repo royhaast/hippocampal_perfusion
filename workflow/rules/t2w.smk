@@ -15,6 +15,7 @@ rule warp_t2w_to_corobl_crop:
         "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS={threads} "
         "antsApplyTransforms -d 3 --interpolation Linear -i {input.nii} -o {output} -r {input.ref}  -t {input.xfm} -t {input.init}"
 
+# Flip left hemisphere
 rule lr_flip_t2w:
     input: 'results/maps/sub-{subject}/sub-{subject}_T2w_L.nii.gz'
     output: 'results/maps/sub-{subject}/sub-{subject}_T2w_Lflip.nii.gz'
@@ -23,6 +24,7 @@ rule lr_flip_t2w:
     shell:
         "c3d {input} -flip x -o  {output}"
 
+# Sample T2w volume onto unfolded hippocampal surface
 rule sample_t2w_hippocampus:
     input:
         nii = 'results/maps/sub-{subject}/sub-{subject}_T2w_{H}.nii.gz',

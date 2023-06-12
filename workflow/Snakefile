@@ -4,13 +4,13 @@ from glob import glob
 import pandas as pd
 import numpy as np
 
-configfile: 'config/config_Mar2022.yml'
+configfile: 'config/config.yml'
 
 # Load participants.tsv file
 df = pd.read_csv(config['participants_tsv'], dtype=str)
 subjects = df.participant_id.to_list() 
-subjects = [str(s).zfill(1) for s in subjects]
-# subjects = ['01']
+# subjects = [str(s).zfill(1) for s in subjects]
+subjects = ['01']
 
 runs = [str(r) for r in range(1,9)]
 
@@ -35,18 +35,18 @@ os.environ[ "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS" ] = "4"
 #         expand('results/hcp_mmp/sub-{subject}/{hemi}.hcp-mmp.nii.gz', subject=subjects, hemi=['lh','rh'])
 
 # Perfusion mapping
-rule all:
-    input:
+# rule all:
+#     input:
         # Full fit
         #expand(
         #    'results/surface_maps/sub-{subject}/sub-{subject}_tpl-lores_{asl_parameter}_{H}.native.shape.gii',
         #    subject=subjects, asl_parameter=config['perfusion_data']['full_fit'].keys(), H=['Lflip','R']
         #),
         # Cortical
-        expand(
-            'results/surface_maps/sub-{subject}/sub-{subject}_hemi-{hemi}_CBF.32k_fs_LR.shape.gii',
-            subject=subjects, hemi=['lh','rh']
-        ),
+        # expand(
+        #    'results/surface_maps/sub-{subject}/sub-{subject}_hemi-{hemi}_CBF.32k_fs_LR.shape.gii',
+        #    subject=subjects, hemi=['lh','rh']
+        #),
         # Run-wise
         #expand(
         #    'results/surface_maps/sub-{subject}/run-{run}/sub-{subject}_run-{run}_tpl-lores_{asl_parameter}_{H}.native.shape.gii',
@@ -100,17 +100,17 @@ include: 'rules/common.smk'
 # Will do MP2RAGE B1+ correction, MPRAGEise, skullstripping, 
 # standard FreeSurfer and prepare for mapping onto hippocampus
 include: 'rules/mp2rage.smk'
-include: 'rules/hcp-mmp.smk'
+#include: 'rules/hcp-mmp.smk'
 
 # Unfold hippocampus
-include: 'rules/autotop.smk'
-include: 'rules/surfaces.smk'
-include: 'rules/t2w.smk'
+#include: 'rules/autotop.smk'
+#include: 'rules/surfaces.smk'
+#include: 'rules/t2w.smk'
 
 # Will prepare other data for mapping onto hippocampus 
-include: 'rules/perfusion.smk'
-include: 'rules/tof.smk'
-include: 'rules/sa2rage.smk'
+#include: 'rules/perfusion.smk'
+#include: 'rules/tof.smk'
+#include: 'rules/sa2rage.smk'
 
 # Extract morphological features
-include: 'rules/morphology.smk'
+#include: 'rules/morphology.smk'
