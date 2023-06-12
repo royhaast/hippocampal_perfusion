@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --array=2
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=128000
+#SBATCH --time=4:00:00
+#SBATCH --job-name=bootstrapping
+#SBATCH --account=ctb-akhanf
+#SBATCH --output=./run_bootstrap_vertices_%a.out
+
+# Load software
+source /home/rhaast/venv/brainstat/bin/activate
+
+# Run script
+python ./bootstrapping_vertices.py 1000 100 $SLURM_ARRAY_TASK_ID
