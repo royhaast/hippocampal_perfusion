@@ -100,10 +100,10 @@ include: 'rules/common.smk'
 # Will do MP2RAGE B1+ correction, MPRAGEise, skullstripping, 
 # standard FreeSurfer and prepare for mapping onto hippocampus
 include: 'rules/mp2rage.smk'
-#include: 'rules/hcp-mmp.smk'
+include: 'rules/hcp-mmp.smk'
 
 # Unfold hippocampus
-#include: 'rules/autotop.smk'
+include: 'rules/autotop.smk'
 #include: 'rules/surfaces.smk'
 #include: 'rules/t2w.smk'
 

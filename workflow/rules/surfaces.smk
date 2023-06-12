@@ -146,7 +146,7 @@ rule surface_info_to_text:
 
             np.savetxt(out_metric,np.transpose(xyz))
 
-# # Compute average surfaces across all subjects, per hemisphere 
+# Compute average surfaces across all subjects, per hemisphere 
 def construct_avg_surface_cmd (wildcards,input,output):
     cmd = "wb_command -surface-average {} -stddev {}".format(output.surface, output.stddev)
     for in_surface in input:

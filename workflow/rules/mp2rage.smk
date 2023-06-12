@@ -44,6 +44,7 @@ rule get_pads_mask:
     shell:
         "bash {params.script} -i {input}"
 
+# Copy to gradient corrected data folder to be used by BIDS apps
 rule copy_depadded:
     input:
         nii = rules.get_pads_mask.output,
@@ -57,7 +58,7 @@ rule copy_depadded:
 
 # Remove non-brain tissue
 rule skull_stripping:
-    input: rules.get_pads_mask.output #unpack(collect_input)
+    input: rules.get_pads_mask.output
     output: 'results/skullstripping/sub-{subject}/sub-{subject}_acq-MP2RAGE_mask.nii.gz'
     params:
         script = 'scripts/skullstripping/run_cat12.m'
@@ -83,7 +84,12 @@ rule apply_brain_mask:
 # Run FreeSurfer recon-all pipeline
 rule freesurfer:
     input: rules.apply_brain_mask.output
-    output: 'results/freesurfer/sub-{subject}/scripts/recon-all.done'
+    output: 
+        reconall = 'results/freesurfer/sub-{subject}/scripts/recon-all.done',
+        T1 = 'results/freesurfer/sub-{subject}/mri/T1.mgz',
+        sphere = expand('results/freesurfer/sub-{{subject}}/surf/{hemi}.sphere.reg', hemi=['lh','rh']),
+        pial = expand('results/freesurfer/sub-{{subject}}/surf/{hemi}.pial', hemi=['lh','rh']),
+        white = expand('results/freesurfer/sub-{{subject}}/surf/{hemi}.white', hemi=['lh','rh']),
     params:
         sd = 'results/freesurfer'
     group: 'freesurfer'
@@ -94,26 +100,7 @@ rule freesurfer:
         mem_mb = 32000
     shell:
         "export SUBJECTS_DIR={params.sd} && "
-        "recon-all -all -s sub-{wildcards.subject} -no-wsgcaatlas -notal-check -threads 8"
-
-# Run FreeSurfer's hippocampal segmentation pipeline
-rule extract_freesurfer_hippocampi:
-    input:
-        freesurfer = rules.freesurfer.output,
-        t2w = join(config['data']['gradcorrect'],'anat/sub-{subject}_acq-TSE_rec-avg.nii.gz')
-    output:
-        lh = 'results/freesurfer/sub-{subject}/lh.hippoAmygLabels-T1-T2w.v21.mgz',
-        rh = 'results/freesurfer/sub-{subject}/rh.hippoAmygLabels-T1-T2w.v21.mgz'
-    params:
-        sd = '/scratch/rhaast/HPC_perfusion/results/freesurfer'    
-    group: 'freesurfer'
-    singularity: config['singularity_freesurfer']
-    threads: 8
-    resources:
-        time = 300,
-        mem_mb = 32000
-    shell:
-        "segmentHA_T2.sh sub-{wildcards.subject} {input.t2w} T2w 1 {params.sd}"   
+        "recon-all -all -s sub-{wildcards.subject} -no-wsgcaatlas -notal-check -threads 8" 
 
 # Prepare MP2RAGE data for mapping on unfolded hippocampus
 rule convert_fsl_xfm_mp2rage:
@@ -129,6 +116,7 @@ rule convert_fsl_xfm_mp2rage:
     shell:
         "c3d_affine_tool -ref {input.ref} -src {input.src} {input.xfm} -fsl2ras -oitk {output}"
 
+# Resample MP2RAGE data to coronal oblique space
 rule warp_t1_to_corobl_crop:
     input:
         nii = lambda wildcards: 'data/preprocessed/sub-{subject}/MP2RAGE/sub-{subject}_acq-hiresMP2RAGE_{file}'.format(
@@ -147,6 +135,7 @@ rule warp_t1_to_corobl_crop:
         "ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS={threads} "
         "antsApplyTransforms -d 3 --interpolation Linear -i {input.nii} -o {output} -r {input.ref} -t {input.xfm2crop} -t {input.xfm2ref} -t {input.xfm2tse}" 
 
+# Flip left hemisphere data
 rule lr_flip_t1:
     input: 'results/maps/sub-{subject}/sub-{subject}_{mp2rage_parameter}_L.nii.gz',
     output: 'results/maps/sub-{subject}/sub-{subject}_{mp2rage_parameter}_Lflip.nii.gz',
