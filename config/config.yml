@@ -1,5 +1,6 @@
 participants_tsv: config/participants.txt
 
+# File paths to preprocessed data
 data:
   bids: data/bids/sub-{subject}
   gradcorrect: data/deriv/gradcorrect/sub-{subject}
@@ -8,8 +9,8 @@ data:
   preprocessed: data/preprocessed/sub-{subject}
 
 mp2rage_data:
-  T1: 'corrT1_0p3_iso_antsWarped_antsAvg.nii.gz' #'acq-hiresMP2RAGE_run-avg_corrT1_upsamp_0p3_template_reg2TSE.nii.gz'
-  T1w: 'corrUNI_0p3_iso_antsWarped_antsAvg.nii.gz' #'acq-hiresMP2RAGE_run-avg_corrUNI_clean_upsamp_0p3_template_reg2TSE.nii.gz'
+  T1: 'corrT1_0p3_iso_antsWarped_antsAvg.nii.gz'
+  T1w: 'corrUNI_0p3_iso_antsWarped_antsAvg.nii.gz'
 
 sa2rage_data:
   B1map: 'b1map_in_microT_reg2T1w.nii.gz'
@@ -37,6 +38,7 @@ xfms:
   loresMP2RAGE: 'fslMoCorr_fslDiCorr_fslTmean_fslBBR-to-highresMP2RAGE.mat'
   SA2RAGE: 'gdyreg-to-MP2RAGE.mat'
 
+# Parameters processed
 parameters:
   - T1
   - T1w
@@ -45,7 +47,6 @@ parameters:
   - TOF
   - CBF
   - PWI
-  # - MEAN
   - tSNR
   - pveCSF
   - pveGM
@@ -55,8 +56,6 @@ parameters:
   - thickness
   - gyrification
   - curvature
-  # - surfdist
-  # - surfdisp
   - vesseldistance
   - vesseldiameter
 
@@ -79,13 +78,13 @@ autotop_matlab: /project/6050199/rhaast/01_Software/HPC_hippunfold/hippocampal_a
 fs_license: /project/6050199/akhanf/opt/freesurfer/.license
 
 # Paths to Singularity containers
-singularity_neuroglia: /project/6050199/akhanf/singularity/bids-apps/khanlab_neuroglia-core_latest.sif 
-singularity_prepdwi: /project/6050199/akhanf/singularity/bids-apps/khanlab_prepdwi_v0.0.13.sif
-singularity_freesurfer: /project/6050199/akhanf/singularity/bids-apps/pwighton_freesurfer_7.1.0.sif
-singularity_connectomewb: /project/6050199/software/transparentsingularity/connectome-workbench_1.4.1_20191117.simg/connectome-workbench_1.4.1_20191117.simg
-singularity_autotop: /project/6050199/akhanf/singularity/bids-apps/khanlab_autotop_deps_latest.sif
-singularity_fmriprep: /project/6050199/akhanf/singularity/bids-apps/poldracklab_fmriprep_20.2.0.sif
-singularity_braincharter: /project/6050199/rhaast/01_Software/singularity/braincharter_v0.2.simg 
+singularity_neuroglia: 'docker://khanlab/neuroglia-core' 
+singularity_prepdwi: 'docker://khanlab/prepdwi:latest'
+singularity_freesurfer: 'docker://freesurfer/freesurfer:7.3.2'
+singularity_connectomewb: 'docker://brainlife/connectome_workbench:1.5.0'
+singularity_autotop: 'docker://khanlab/autotop_deps'
+singularity_fmriprep: 'docker://nipreps/fmriprep:latest'
+singularity_braincharter: 'docker://rhaast/braincharter:latest'  
 
 # Matlab
 matlab_bin: '/cvmfs/restricted.computecanada.ca/easybuild/software/2017/Core/matlab/2019b/bin/matlab'
