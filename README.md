@@ -7,11 +7,9 @@ This repository contains the data analysis code and (visualization) notebooks re
 that can be found here.
 
 - The analysis pipeline (see `workflow` for more details) is build using the [Snakemake](https://snakemake.readthedocs.io/en/stable/) workflow management system.
-- Several `notebooks` are uploaded to support the inspection of the intermediate analysis steps (i.e., hippocampal segmentation and vasculature).
+- Several `notebooks` are uploaded to support the inspection of the intermediate analysis steps (i.e., hippocampal segmentation and vasculature), as well as the different visualization steps (in `visualization`).
 - `results/surface_maps` contains group-averaged surface maps as displayed in the manuscript figures. 
 - A more interactive visualization tool of the results is possible using our online data explorer that can be accessed [here](https://tinyurl.com/3z8czuy9/).
-
-TODO: add figure notebooks and output
 
 #### Dependencies
 - Singularity and containers (see `config/config.yml`)
