@@ -58,12 +58,11 @@ rule tof_stedi_filter:
     input: rules.tof_n4_correction.output
     output: 'results/vasculature/sub-{subject}/{H}/sub-{subject}_TOF_{H}_n4_stedi.nii.gz'
     group: 'map_vasculature'
-    #singularity: config['singularity_prepdwi']
     threads: 8
     resources:
         mem_mb = 32000    
     shell:
-        "bash scripts/tof_filter.sh {input}"      
+        "bash workflow/scripts/tof/tof_filter.sh {input}"      
 
 # Extract vessels 
 rule tof_extract_vessels:
@@ -75,7 +74,7 @@ rule tof_extract_vessels:
     resources:
         mem_mb = 32000        
     shell:
-        "bash scripts/tof_extract_vessels.sh $(realpath {input}) 'nii.gz' TOF"
+        "bash workflow/scripts/tof/tof_extract_vessels.sh $(realpath {input}) 'nii.gz' TOF"
 
 """ 
 Manual work needed from here for 3D reconstruction of the vasculature using the 
@@ -84,14 +83,15 @@ A template MeVisLab file (*.mlab) can be found in the 'resources' directory. Aft
 generating the vessel masks (i.e., '') run the 'tof_extract_vessels' rule
 
 """
+
 # Extract features from reconstructed vasculature
-# rule tof_binarize_segmentation:
-#     input: 'results/vasculature/sub-{subject}/{H}/vessel_seg_0p7.nii.gz'
-#     output: 'results/vasculature/sub-{subject}/{H}/sub-{subject}_TOF_n4_vessel_seg_0p7_bin.nii.gz'
-#     group: 'map_vasculature'
-#     singularity: config['singularity_prepdwi']
-#     shell:
-#         "fslmaths {input} -bin {output}"       
+rule tof_binarize_segmentation:
+    input: 'results/vasculature/sub-{subject}/{H}/vessel_seg_0p7.nii.gz'
+    output: 'results/vasculature/sub-{subject}/{H}/sub-{subject}_TOF_n4_vessel_seg_0p7_bin.nii.gz'
+    group: 'map_vasculature'
+    singularity: config['singularity_prepdwi']
+    shell:
+        "fslmaths {input} -bin {output}"       
 
 rule tof_extract_diameters:
     input: 'results/vasculature/sub-{subject}/{H}/vessel_seg_{scale}.nii.gz'
@@ -102,7 +102,7 @@ rule tof_extract_diameters:
     resources:
         mem_mb = 32000     
     shell:
-        "bash workflow/scripts/tof_extract_diameters.sh $(realpath {input}) 'nii.gz'"
+        "bash workflow/scripts/tof/tof_extract_diameters.sh $(realpath {input}) 'nii.gz'"
 
 rule tof_angiograms:
     input:
@@ -117,7 +117,7 @@ rule tof_angiograms:
     threads: 8
     resources:
         mem_mb = 32000          
-    script: "../scripts/tof_angiograms.py"
+    script: "workflow/scripts/tof/tof_angiograms.py"
 
 rule sample_angiograms_hippocampus:
     input:
@@ -142,7 +142,7 @@ rule generate_notebooks:
         notebook = 'notebooks/vascular_tree.ipynb'
     output: 'results/vasculature/sub-{subject}/{H}/sub-{subject}_{H}_vascular_tree.html'
     params:
-        script = 'workflow/scripts/run_notebook.sh'
+        script = 'workflow/scripts/tof/run_notebook.sh'
     group: 'map_vasculature'
     threads: 8
     resources:

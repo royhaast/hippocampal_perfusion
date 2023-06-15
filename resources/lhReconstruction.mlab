@@ -1,0 +1,1302 @@
+// MDL v1 utf8
+mevislabVersion = 3.3
+network  {
+  watchlist = ""
+}
+module SoOrientationModel {
+  internal  {
+    frame = "297 -191 144 56"
+    moduleGroupName = "Vessel visualization"
+    windows  {
+      window _default {
+        geometry = "1194 802 171 26"
+        sizeHint = "171 26"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SoOrientationModel
+    renderCaching = AUTO
+    boundingBoxCaching = AUTO
+    renderCulling = AUTO
+    pickCulling = AUTO
+    model = SKULL
+    modifyColors = FALSE
+    ambientColor1 = "0.200000002980232 0.200000002980232 0.200000002980232"
+    diffuseColor1 = "0.699999988079071 0.699999988079071 0.699999988079071"
+    ambientColor2 = "0.200000002980232 0.200000002980232 0.200000002980232"
+    diffuseColor2 = "1 0 0"
+    shininess = 0.2
+    specularColor = "0 0 0"
+  }
+}
+module SoOrientationInset {
+  internal  {
+    frame = "301 -271 136 56"
+    moduleGroupName = "Vessel visualization"
+  }
+  fields  {
+    instanceName = SoOrientationInset
+    renderCaching = AUTO
+    boundingBoxCaching = AUTO
+    renderCulling = AUTO
+    pickCulling = AUTO
+    on = TRUE
+    projectionType = ORTHOGRAPHIC
+    location = LOWER_LEFT
+    size = "50 50"
+    margin = "0 0"
+    sizeAsPercentage = FALSE
+    renderDelayedPaths = TRUE
+  }
+}
+module SoShadowCast {
+  internal  {
+    frame = "157 -271 120 56"
+    moduleGroupName = "Vessel visualization"
+    windows  {
+      window _default {
+        geometry = "2681 400 397 338"
+        sizeHint = "397 338"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SoShadowCast
+    renderCaching = AUTO
+    boundingBoxCaching = AUTO
+    renderCulling = AUTO
+    pickCulling = AUTO
+    lightPos "-1 -1 -1 0" {
+      ignore = 1
+    }
+    lightMode = PLANE
+    projectionPlane "0 1 0 0" {
+      ignore = 1
+    }
+    planeAngle = 0.69813168
+    castColor = "0.649999976158142 0.620000004768372 0.509999990463257"
+    castRender = TRUE
+    planeRender = TRUE
+    planeColor = "0.889999985694885 0.860000014305115 0.699999988079071"
+  }
+}
+module SoBackground {
+  internal  {
+    frame = "25 -271 112 56"
+    moduleGroupName = "Vessel visualization"
+    windows  {
+      window _default {
+        geometry = "2809 498 141 142"
+        sizeHint = "141 142"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SoBackground
+    rotate = TRUE
+    flip = FALSE
+    on = TRUE
+    depthBuffer = TRUE
+  }
+}
+module SoView2DOverlay {
+  internal  {
+    frame = "869 229 136 56"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "613 368 470 368"
+        sizeHint = "470 368"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SoView2DOverlay
+    interactionProviderID = ""
+    drawingOn = TRUE
+    editingOn = TRUE
+    fixZOn = TRUE
+    color = "1 1 1"
+    selectionTolerance = 4
+    needsValidVoxel = TRUE
+    button1 = IGNORED
+    button2 = IGNORED
+    button3 = IGNORED
+    shift = IGNORED
+    control = IGNORED
+    alt = IGNORED
+    wantsAllEvents = TRUE
+    wantsKeyEvents = TRUE
+    wantsMouseWheelEvents = FALSE
+    setEventHandled = FALSE
+    ignoreHandledEvents = FALSE
+    createNewMode = FALSE
+    renderOnSlab = TRUE
+    clipToSlice = TRUE
+    cursorShape = UNDEFINED_CURSOR
+    overlayName = ""
+    cacheTextures = TRUE
+    blendMode = BLEND_BLEND
+    overwriteCurrentTimePoint = TRUE
+    timePoint = 0
+    maxTimePoint = 0
+    filterMode = FILTER_NEAREST
+    inheritFilterMode = FALSE
+    lutPrecision = VIEW2D_LUT_AUTO
+    alphaFactor = 0.41999999
+    baseColor = "1 0 0"
+    useWorldCoords = FALSE
+    applyLut = TRUE
+    isCheckerTiling = FALSE
+    checkerTileSize = 2
+    areCheckerTilesInverted = FALSE
+  }
+}
+module SoVascularSystem {
+  internal  {
+    frame = "1053 37 136 56"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "1141 252 414 631"
+        sizeHint = "409 631"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SoVascularSystem
+    interactionProviderID = ""
+    autoApply = TRUE
+    complexity = 1
+    pointSize = 1
+    lineWidth = 3
+    textureScaleX = 0.5
+    textureScaleY = 0.5
+    recursionDepth = -1
+    showLines = FALSE
+    labelMode = HIERACHY_LABEL
+    textureMode = SCALE_BY_RADIUS
+    textureCoordinateMode = FOR_ALL_ELEMENTS
+    radiusMode = MIN_DIST
+    displayMode = DISPLAY_SURFACE
+    radiusScale = 1
+    radiusFixedSize = 1
+    visible = TRUE
+    texture = TRUE
+    numSmoothingPasses = 10
+    overallSmoothness = 0.69999999
+    smoothIndependently = TRUE
+    radiusSmoothness = 1
+    skeletonSmoothness = 0.1
+    endCapScaling = 1
+    useGeneralColor = TRUE
+    generalColor = "1 0 0"
+    useIntegerLUT = TRUE
+    useAlternativeTransparency = TRUE
+    alternativeTransparencyColor = "0 0 0"
+    selectedCoordinate = "0 0 0"
+    snapMode = SNAP_TO_SKELETON
+    enableSelection = TRUE
+    continuousHitCheck = FALSE
+    cursorShape = CROSS_CURSOR
+    enableInteractivePreviewMode = FALSE
+    enableRecursiveHighlighting = TRUE
+    highlightMode = HIGHLIGHT_OFF
+    interactivePreviewColor = "1 1 0"
+    interactivePreviewAlpha = 0.5
+    selectionTolerance = 2
+    numSkeletonsSmartSnap = 5
+    useMinRadiusCutOff = FALSE
+    minRadiusCutOffValue = 1
+    cutOffColor = "1 1 1"
+    cutOffAlpha = 1
+    useDirectGraph = TRUE
+    workDirectlyOnInputGraph = TRUE
+    useSkeletonColors = FALSE
+  }
+}
+module DtfSkeletonization {
+  internal  {
+    frame = "1017 229 128 56"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "1303 548 366 320"
+        sizeHint = "363 320"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = DtfSkeletonization
+    updateSkeletonGraph = TRUE
+    compileGraphVoxels = TRUE
+    objectMinValue = 1
+    cavityVolume = 200
+    maxDistance = 10000
+    useMaxDistance = TRUE
+    autoUpdateMode = AutoUpdate
+    skeletonOnly = FALSE
+  }
+}
+module RegionGrowing {
+  internal  {
+    frame = "893 325 120 56"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "120 275 732 602"
+        sizeHint = "693 602"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = RegionGrowing
+    autoUpdateMode = AutoUpdate
+    lowerThreshold = 11
+    upperThreshold = 100
+    enableAutoThresholdInterval = FALSE
+    basicNeighborhoodType = BNBH_2D_4_XY
+    extendedNeighborhoodType = ENBH_3D_26_XYZ
+    useAdditionalSeed = FALSE
+    additionalSeed = "0 0 0 0 0 0"
+    additionalSeedType = 0
+    additionalSeedCoordSystem = VoxelCoordinates
+    initStackSizeTweak = 0.1
+    prohibitInputScalingTweak = FALSE
+    incrementalUpdateMode = Smart
+    useExtendedNBH = TRUE
+    calcBoundaryOverlap = FALSE
+    unitType = UnitTypeGrayValue
+    internalAccuracy = Auto
+    autoUpdateUnitType = FALSE
+    stretchOutputOverTime = FALSE
+    showPartialResults = FALSE
+    acceptedMarkerType = -1
+    autoSelectHigherCoords = TRUE
+    cCoord = 0
+    uCoord = 0
+    posFillValue = -1
+    negFillValue = 0
+    invertResult = FALSE
+    showOuterBoundariesOnly = FALSE
+    upperVolumeLimit_ml = 100
+    enableUpperVolumeLimit = FALSE
+    autoThresholdIntervalSizeInPercent = 5
+  }
+}
+module SoView2DMarkerEditor {
+  internal  {
+    frame = "715 427 160 64"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "626 57 650 608"
+        sizeHint = "650 608"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = MarkerEditor
+    interactionProviderID = ""
+    drawingOn = TRUE
+    editingOn = TRUE
+    fixZOn = TRUE
+    color = "1 0 0"
+    selectionTolerance = 4
+    needsValidVoxel = TRUE
+    button1 = PRESSED
+    button2 = IGNORED
+    button3 = IGNORED
+    shift = IGNORED
+    control = IGNORED
+    alt = IGNORED
+    wantsAllEvents = FALSE
+    wantsKeyEvents = TRUE
+    wantsMouseWheelEvents = FALSE
+    setEventHandled = FALSE
+    ignoreHandledEvents = FALSE
+    createNewMode = FALSE
+    renderOnSlab = FALSE
+    clipToSlice = FALSE
+    cursorShape = UNDEFINED_CURSOR
+    depthVisibility = 1
+    snapToVoxel = TRUE
+    snapToSlice = TRUE
+    currentType = 0
+    deleteOnClick = TRUE
+    addOnClick = TRUE
+    alphaFactor = 1
+    minimumAlpha = 0.1
+    iconFile = $(MLAB_MeVisLab_Standard)/Modules/Resources/Images/markerIcons.tif
+    useIconFile = FALSE
+    iconIdx = 0
+    drawMarkerShapesWithLines = FALSE
+    selectingOn = TRUE
+    alwaysPerformHitTest = FALSE
+    actOnReleaseOnly = TRUE
+    editorMode = EDIT_MARKER
+    colorMode = COLOR_BY_TYPE
+    textColorMode = COLOR_TEXT
+    textMode = TEXT_OFF
+    textPosition = TEXT_POSITION_RIGHT_BELOW
+    textColor = "1 1 1"
+    textShadow = TRUE
+    textFontSize = 12
+    showTextOnlyForSelectedMarker = FALSE
+    cutText = FALSE
+    maxNumberOfLines = 1
+    vectorArrow = VECTOR_END_ARROW
+    vectorLineWidth = 1
+    useAntiAlias = FALSE
+    useVectorLengthAsMarkerSize = FALSE
+    depthVectorDrawMode = DRAW_NONE
+    drawMode = DRAW_MARKER
+    highlightSelection = TRUE
+    selectiveDrawing = FALSE
+    selectionBoxesForCurrentOnly = FALSE
+    cooperative = FALSE
+    overwriteCurrentTimePoint = FALSE
+    newCurrentTimePoint = 0
+    depthVisibilityMode = DEPTH_IN_SLICES
+    cursorShapeDragStartPoint = CROSS_MOVE_CURSOR
+    cursorShapeDragEndPoint = CROSS_MOVE_CURSOR
+    cursorShapeDragResize = CROSS_MOVE_CURSOR
+    cursorShapeDragOffset = MOVE_ALL_CURSOR
+    cursorShapeDragMove = MOVE_ALL_CURSOR
+    cursorShapeDelete = CROSS_MINUS_CURSOR
+    listString = ""
+    index = 14
+    persistent = FALSE
+    listStringEnable = FALSE
+    applySelect = FALSE
+    name = ""
+    newName = ""
+    overflowMode = None
+    maxSize = 0
+    useInsertTemplate = FALSE
+    posXYZ = "35.3288917541504 -32.1562576293945 -30.1332015991211"
+    posC = 0
+    posT = 0
+    posU = 0
+    vecXYZ = "0 0 0"
+    type = 0
+    newPosXYZ = "0 0 0"
+    newPosC = 0
+    newPosT = 0
+    newPosU = 0
+    newVecXYZ = "0 0 0"
+    newType = 0
+  }
+}
+module View2D {
+  internal  {
+    frame = "749 137 120 64"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "100 476 445 427"
+        sizeHint = "400 400"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = 2DView
+    inventorInputOn = TRUE
+    inventorOutputOn = FALSE
+    view2DExtensionsOn = TRUE
+    startSlice = 46
+    numSlices = 1
+    numXSlices = 1
+    sliceStep = 1
+    slab = 1
+    blendMode = BLEND_REPLACE
+    timePoint = 0
+    maxTimePoint = 0
+    filterMode = FILTER_LINEAR
+    standardKeys = TRUE
+    cineMode = CINE_Z
+    cineDirection = CINE_PINGPONG
+    cineRepeat = CINE_ONCE
+    cineSpeed = 0.1
+    cineAlwaysReset = TRUE
+    snapToCenter = FALSE
+    zoomMode = VIEW2D_AUTO_ZOOM
+    unzoomOnImageChange = FALSE
+    sliceZoom = 1
+    sliceZoomSynced = 1
+    baseColor = "1 1 1"
+    margin = "2 2"
+    sliceOrigin = "0 0"
+    useShaders = TRUE
+    useManagedInteraction = FALSE
+    lutCenter = 10
+    lutWidth = 12
+    annotationOn = TRUE
+    annotationMode = ANNO_MODE_AUTO
+    annotationSizeMode = ANNO_SHOW_DETAILED
+    annotationCol = "0.899999976158142 0.899999976158142 0.899999976158142"
+    annotationFontSize = ANNO_SIZE_AUTO
+    annoCoords = Voxel
+    annoCTValue = AsIs
+    borderOn = TRUE
+    borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
+    valueHighPrecision = FALSE
+    showColorChannelValues = FALSE
+    colorChannelSeparator = " / "
+    maxPrecision = 4
+    enableSlicing = TRUE
+    useRelativeLUTIfNoInputImage = TRUE
+  }
+}
+module itkImageFileReader {
+  internal  {
+    frame = "325 833 136 64"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "592 322 314 423"
+        sizeHint = "314 423"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = TOF
+    fileDataType = int16
+    autoDetermineDataType = FALSE
+    correctSubVoxelShift = TRUE
+    fileDimension = 3
+    info = "Loading okay."
+    numDims = 3
+    fileType = TypeNotApplicable
+    componentType = float
+    pixelType = SCALAR
+    loaderType = NiftiImageIO
+    outputMetaDataStr = "ITK_FileNotes : 
+aux_file : 
+bitpix : 32
+cal_max : 0
+cal_min : 0
+datatype : 16
+descrip : 
+dim[0] : 3
+dim[1] : 124
+dim[2] : 115
+dim[3] : 183
+dim[4] : 1
+dim[5] : 1
+dim[6] : 1
+dim[7] : 1
+dim_info : 
+intent_code : 0
+intent_name : 
+intent_p1 : 0
+intent_p2 : 0
+intent_p3 : 0
+pixdim[0] : 1
+pixdim[1] : 0.3
+pixdim[2] : 0.3
+pixdim[3] : 0.3
+pixdim[4] : 0
+pixdim[5] : 0
+pixdim[6] : 0
+pixdim[7] : 0
+qform_code : 1
+qoffset_x : -38.1513
+qoffset_y : 29.1012
+qoffset_z : -52.353
+quatern_b : 0.376855
+quatern_c : 0.00411026
+quatern_d : 0.00167229
+scl_inter : 0
+scl_slope : 1
+sform_code : 0
+slice_code : 
+slice_duration : 0
+slice_end : 0
+slice_start : 0
+srow_x : 0 0 0 0
+srow_y : 0 0 0 0
+srow_z : 0 0 0 0
+toffset : 0
+vox_offset : 352
+xyzt_units : 
+"
+    suppressErrorPosting = FALSE
+    unresolvedFileName = $(HOME)/graham/scratch/MSTRCHT_BIDSify/derivatives/angiography/sub-01/anat/preprocessing/sub-01_acq-TOF_AVG_angio_0p3ISO_reg-to-hires_Warped_lhHippo_N4.nii.gz
+  }
+}
+module View2D {
+  internal  {
+    frame = "877 141 120 56"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "1381 180 470 430"
+        sizeHint = "400 400"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = View2D
+    inventorInputOn = TRUE
+    inventorOutputOn = FALSE
+    view2DExtensionsOn = TRUE
+    startSlice = 182
+    numSlices = 1
+    numXSlices = 1
+    sliceStep = 1
+    slab = 1
+    blendMode = BLEND_REPLACE
+    timePoint = 0
+    maxTimePoint = 0
+    filterMode = FILTER_LINEAR
+    standardKeys = TRUE
+    cineMode = CINE_ZT
+    cineDirection = CINE_FORWARD
+    cineRepeat = CINE_ONCE
+    cineSpeed = 0.1
+    cineAlwaysReset = TRUE
+    snapToCenter = TRUE
+    zoomMode = VIEW2D_AUTO_ZOOM
+    unzoomOnImageChange = FALSE
+    sliceZoom = 1
+    sliceZoomSynced = 1
+    baseColor = "1 1 1"
+    margin = "2 2"
+    sliceOrigin = "0 0"
+    useShaders = TRUE
+    useManagedInteraction = FALSE
+    lutCenter = 8.89631843566895
+    lutWidth = 12.7926979064941
+    annotationOn = TRUE
+    annotationMode = ANNO_MODE_AUTO
+    annotationSizeMode = ANNO_SHOW_DETAILED
+    annotationCol = "0.899999976158142 0.899999976158142 0.899999976158142"
+    annotationFontSize = ANNO_SIZE_AUTO
+    annoCoords = Voxel
+    annoCTValue = AsIs
+    borderOn = FALSE
+    borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
+    valueHighPrecision = TRUE
+    showColorChannelValues = FALSE
+    colorChannelSeparator = " / "
+    maxPrecision = 4
+    enableSlicing = TRUE
+    useRelativeLUTIfNoInputImage = TRUE
+  }
+}
+module IntervalThreshold {
+  internal  {
+    frame = "525 628 128 56"
+    moduleGroupName = Preprocessing
+    windows  {
+      window _default {
+        geometry = "730 364 458 410"
+        sizeHint = "458 410"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = IntervalThreshold
+    lowerType = IntervalMin
+    innerType = ImgOrig
+    upperType = IntervalMax
+    centerWidthSet = FALSE
+    threshCenter = 2617.83492822966
+    threshWidth = 5215.66985645933
+    threshMin = 10
+    threshMax = 5225.66985645933
+    lowerUserValue = 0
+    innerUserValue = 1
+    upperUserValue = 1
+    changeMinMax = FALSE
+    changedMin = 0
+    changedMax = 1000
+  }
+}
+module WEMSave {
+  internal  {
+    frame = "839 -198 88 56"
+    moduleGroupName = Export
+    windows  {
+      window _default {
+        geometry = "225 433 559 174"
+        sizeHint = "559 174"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WEMSave
+    autoApply = FALSE
+    autoUpdate = FALSE
+    autoClear = TRUE
+    listenToFinishingNotifications = FALSE
+    listenToRepaintNotifications = FALSE
+    listenToSelectionChangedNotifications = FALSE
+    filename = $(NETWORK)/lh/vessel_mesh_0p7.stl
+    fileType = "ASCII Standard Tessellation Language (.stl)"
+    inWEMValid = TRUE
+    status = "WEM saved to file."
+    shouldSaveNodeNormals = FALSE
+    shouldSaveNodeColors = FALSE
+    shouldSaveEdges = TRUE
+    shouldSaveFaceNormals = TRUE
+    shouldSavePVLs = TRUE
+  }
+}
+module WEMVascularSystem {
+  internal  {
+    frame = "891 37 152 56"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "894 452 336 471"
+        sizeHint = "336 471"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WEMVascularSystem
+    id = 0
+    autoApply = TRUE
+    updateMode = AutoUpdate
+    overwriteLabelDescription = FALSE
+    label = ""
+    description = ""
+    shouldComputeNormals = FALSE
+    numSmoothingPasses = 3
+    smoothingFactor = 0.75
+    radiusMode = Min
+    radiusScale = 0.69999999
+    radiusFixedSize = 2
+    blendingStrength = Low
+    polygonalDensity = High
+    useTaperOptimization = TRUE
+    taperEdgePercentage = 0.1
+    taperTargetRadius = 0.60000002
+    generateSmoothFurcationJoins = TRUE
+    generateLockedFacesAtLeafNodes = FALSE
+    distanceImageRadiusMin = 5
+    distanceImageRadiusMax = 20
+    distanceImageWeightMin = 0
+    distanceImageWeightMax = 1
+  }
+}
+module SoWEMRenderer {
+  internal  {
+    frame = "-63 -391 160 72"
+    moduleGroupName = "Vessel visualization"
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "798 400 494 509"
+        sizeHint = "494 509"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SoWEMRenderer
+    interactionProviderID = ""
+    autoApply = TRUE
+    autoUpdate = TRUE
+    autoClear = TRUE
+    enableCreaseAngle = FALSE
+    creaseAngle = 75
+    useHighlightSelected = FALSE
+    highlightColor = "1 0 0"
+    highlightIntensity = 0.5
+    faceRenderingMode = WEM_FACE_RENDERING_MODE_DOUBLE_SIDE
+    allowHits = FALSE
+    performPreHitTest = FALSE
+    cursorShape = CROSS_CURSOR
+    colorMode = WEM_COLOR_LUT_VALUES
+    drawFaces = TRUE
+    faceDiffuseColor = "1 0 0"
+    useFaceAmbientColor = TRUE
+    faceAmbientColor = "0 0 0"
+    useFaceSpecularColor = TRUE
+    faceSpecularColor = "1 1 1"
+    faceAlphaValue = 1
+    faceShininessValue = 0.2
+    primitiveValueLists = LUT,MinDistance,MaxDistance,EdgeID,WEMSingleColoredFaces
+    selectedPrimitiveValueList = LUT
+    selectedPrimitiveValueAlphaList = MinDistance
+    primitiveValueListValid = TRUE
+    primitiveValueListAlphaValid = TRUE
+    overwriteAlphaWithPVL = FALSE
+    wemPatchToRender = -1
+    maxWEMPatchIndex = 9
+    cachePatches = FALSE
+    sendAdjacency = FALSE
+    hitModifierKey = AllModifiersMask
+    selectedTab = 0
+  }
+}
+module SoExaminerViewer {
+  internal  {
+    frame = "109 -479 152 56"
+    moduleGroupName = "Vessel visualization"
+    windows  {
+      window _viewer {
+        geometry = "312 215 488 626"
+        sizeHint = "400 400"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SoExaminerViewer
+    renderCaching = AUTO
+    boundingBoxCaching = AUTO
+    renderCulling = AUTO
+    pickCulling = AUTO
+    border = FALSE
+    background = "0 0 0"
+    transparency = BLEND
+    antialiasing = FALSE
+    antialiasingNumPasses = 1
+    useSampleBuffers = FALSE
+    numSamples = 8
+    grabKeyFocus = TRUE
+    enableKeyCommands = TRUE
+    snapshotFormat = SNAPSHOT_RGB
+    outputAviFile = ""
+    autoRedrawWhenRecording = TRUE
+    frameRate = 7
+    frameRateAvi = 15
+    outputSnapshotFile = none
+    outputSnapshotFileWritten = none
+    autoIncreaseFile = TRUE
+    showSnapshotWithShell = FALSE
+    snapCount = 0
+    inputDevicesList = ""
+    headlight = TRUE
+    decoration = TRUE
+    popupMenuEnabled = FALSE
+    viewing = TRUE
+    autoClipping = TRUE
+    drawStyle = VIEW_AS_IS
+    interactiveDrawStyle = VIEW_LOW_COMPLEXITY
+    viewAllFlag = FALSE
+    initialCameraOrientation = CAMERA_KEEP_AS_IS
+    applyCameraOrientation = CAMERA_KEEP_AS_IS
+    cameraType = CAMERA_PERSPECTIVE
+    autoApplyUserSettingOrientation = FALSE
+    userSettingOrientation = "0 0 1 0"
+    automaticViewAll = FALSE
+    storeCurrentState = TRUE
+    saveCamera = TRUE
+    cursor = TRUE
+    isCameraStored = TRUE
+    perspective = TRUE
+    stereoViewing = FALSE
+    stereoOffset = 3
+    height = 0.78539819
+    position = "19.238317489624 -23.3588333129883 101.350471496582"
+    orientation = "0 0 1 0"
+    nearDistance = 93.536964
+    farDistance = 153.6395
+    focalDistance = 123.5583
+    forceRedrawOnInteraction = FALSE
+    button1events = TO_VIEWER
+    button2events = TO_VIEWER
+    button3events = TO_VIEWER
+    keyEvents = TO_VIEWER
+    animationEnabled = FALSE
+    feedback = FALSE
+    feedbackSize = 32
+    mouseInteraction = ""
+    rotationAxis = "0 1 0"
+    rotationAngle = 360
+    rotationSteps = 80
+    recordRotation = TRUE
+    wheelZoomEnabled = TRUE
+    wheelRotationEnabled = TRUE
+  }
+}
+module SoGVRVolumeRenderer {
+  internal  {
+    frame = "-219 -197 168 64"
+    moduleGroupName = "Vessel visualization"
+    windows  {
+      window _default {
+        geometry = "741 274 437 590"
+        sizeHint = "437 590"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = MIP
+    renderCaching = AUTO
+    boundingBoxCaching = AUTO
+    renderCulling = AUTO
+    pickCulling = AUTO
+    on = TRUE
+    autoLoad = TRUE
+    interactiveQuality = 0.1
+    staticQuality = 1
+    interactiveSamplingRate = 1
+    staticSamplingRate = 1
+    blendMode = MIP
+    octreeNodeSize = NODE_SIZE_32
+    octreeParentComputationMethod = Rank
+    octreeParentComputationRank = 4
+    currentTimePoint = 0
+    maxTimePoint = 0
+    force8bit = FALSE
+    filterVolumeData = FilterLinear
+    filterLut = TRUE
+    subVolumeStartX = 0
+    subVolumeStartY = 0
+    subVolumeStartZ = 0
+    subVolumeEndX = 124
+    subVolumeEndY = 115
+    subVolumeEndZ = 183
+    zbuffer = TRUE
+    permitClipping = TRUE
+    drawOnPlanes = TRUE
+    sizeOutputX = 124
+    sizeOutputY = 115
+    sizeOutputZ = 183
+    incrementalUpdate = TRUE
+    highQualityStaticUpdate = FALSE
+    staticRenderingAfterInteractionOnly = FALSE
+    adaptQualityToWindowSize = TRUE
+    rayCastTextureStorage = RayCastTextureStorage_Auto
+    renderMode = Illuminated
+    greyCenter = 0.377
+    greyWidth = 1
+    greyInvert = FALSE
+    alphaCenter = 0
+    alphaWidth = 0.5
+    alphaInvert = FALSE
+    colorFactor = "1 1 1"
+    alphaFactor = 1
+    enhancementAlphaMix = 0.25
+    boundaryEnhancement = FALSE
+    boundaryEnhancementFactor = 1
+    boundaryEnhancementExponent = 1
+    boundaryEnhancementGradientBias = 0
+    silhouetteEnhancement = FALSE
+    silhouetteEnhancementExponent = 1
+    silhouetteEnhancementFactor = 1
+    toneShading = FALSE
+    toneShadingWarmColor = "0.674509823322296 0.533333361148834 0.141176477074623"
+    toneShadingColdColor = "0 0 0.400000005960464"
+    toneShadingWarmDiffuse = 0.60000002
+    toneShadingColdDiffuse = 0.2
+    toneShadingAngle = 45
+    materialAmbient = 0.60000002
+    materialDiffuse = 1
+    materialSpecular = 1
+    materialSpecularity = 32
+    reduceLightingOnLowGradientMagnitude = FALSE
+    light1Enabled = TRUE
+    light1DiffuseIntensity = 1
+    light1SpecularIntensity = 1
+    light1Color = "1 1 1"
+    light1PolarPhi = 0
+    light1PolarRho = 0
+    light2Enabled = FALSE
+    light2DiffuseIntensity = 1
+    light2SpecularIntensity = 1
+    light2Color = "1 1 1"
+    light2PolarPhi = 45
+    light2PolarRho = 45
+    light3Enabled = FALSE
+    light3DiffuseIntensity = 1
+    light3SpecularIntensity = 1
+    light3Color = "1 1 1"
+    light3PolarPhi = -45
+    light3PolarRho = 0
+    gradientQuality = GradientQualityAutomatic
+    selectionAlphaThreshold = 0.2
+    selectionActive = FALSE
+    useWorldCoords = TRUE
+  }
+}
+module itkImageFileWriter {
+  internal  {
+    frame = "515 -286 128 56"
+    moduleGroupName = Export
+    windows  {
+      window _default {
+        geometry = "818 333 348 412"
+        sizeHint = "283 412"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = itkImageFileWriter
+    useCompression = FALSE
+    correctSubVoxelShift = TRUE
+    forceDirectionCosineWrite = TRUE
+    outputVoxelType = Automatic
+    info = "File saved successfully"
+    unresolvedFileName = $(NETWORK)/lh/vessel_seg_1p0.nii.gz
+  }
+}
+module VoxelizeWEM {
+  internal  {
+    frame = "499 -202 160 64"
+    moduleGroupName = Export
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "788 361 343 416"
+        sizeHint = "343 416"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Voxelize_scale_1
+    mode = Surface
+    distanceMode = VoxelDistance
+    surface = TRUE
+    surfaceThickness = 1
+    fillInside = TRUE
+    antiAliasing = TRUE
+    interiorBandwidth = 3
+    exteriorBandwidth = 3
+    outputClosestTriangle = FALSE
+    outputClosestPVL = FALSE
+    interpolatePVL = FALSE
+    invalidPVLValue = 0
+    pvlName = LUT
+    invertNormals = FALSE
+    outputClosestNode = FALSE
+    outputClosestNormal = FALSE
+    normalMode = FaceNormal
+    normalType = Type_UInt8
+  }
+}
+module WEMVascularSystem {
+  internal  {
+    frame = "721 37 160 56"
+    moduleGroupName = "Vessel reconstruction"
+    windows  {
+      window _default {
+        geometry = "894 452 336 471"
+        sizeHint = "336 471"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WEMVascularSystem1
+    id = 0
+    autoApply = TRUE
+    updateMode = AutoUpdate
+    overwriteLabelDescription = FALSE
+    label = ""
+    description = ""
+    shouldComputeNormals = FALSE
+    numSmoothingPasses = 3
+    smoothingFactor = 0.75
+    radiusMode = Min
+    radiusScale = 1
+    radiusFixedSize = 2
+    blendingStrength = Low
+    polygonalDensity = High
+    useTaperOptimization = TRUE
+    taperEdgePercentage = 0.1
+    taperTargetRadius = 0.60000002
+    generateSmoothFurcationJoins = FALSE
+    generateLockedFacesAtLeafNodes = FALSE
+    distanceImageRadiusMin = 5
+    distanceImageRadiusMax = 20
+    distanceImageWeightMin = 0
+    distanceImageWeightMax = 1
+  }
+}
+module itkImageFileWriter {
+  internal  {
+    frame = "679 -286 136 56"
+    moduleGroupName = Export
+    windows  {
+      window _default {
+        geometry = "818 333 348 412"
+        sizeHint = "283 412"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = itkImageFileWriter1
+    useCompression = FALSE
+    correctSubVoxelShift = TRUE
+    forceDirectionCosineWrite = TRUE
+    outputVoxelType = Automatic
+    info = "File saved successfully"
+    unresolvedFileName = $(NETWORK)/lh/vessel_seg_0p7.nii.gz
+  }
+}
+module VoxelizeWEM {
+  internal  {
+    frame = "659 -202 176 64"
+    moduleGroupName = Export
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "788 361 343 416"
+        sizeHint = "343 416"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Voxelize_scale_0p7
+    mode = Surface
+    distanceMode = VoxelDistance
+    surface = TRUE
+    surfaceThickness = 1
+    fillInside = TRUE
+    antiAliasing = TRUE
+    interiorBandwidth = 3
+    exteriorBandwidth = 3
+    outputClosestTriangle = FALSE
+    outputClosestPVL = FALSE
+    interpolatePVL = FALSE
+    invalidPVLValue = 0
+    pvlName = LUT
+    invertNormals = FALSE
+    outputClosestNode = FALSE
+    outputClosestNormal = FALSE
+    normalMode = FaceNormal
+    normalType = Type_UInt8
+  }
+}
+module itkImageFileReader {
+  internal  {
+    frame = "477 833 136 64"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "802 358 314 423"
+        sizeHint = "314 423"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = BrainCharter
+    fileDataType = int16
+    autoDetermineDataType = FALSE
+    correctSubVoxelShift = TRUE
+    fileDimension = 3
+    info = "Loading okay."
+    numDims = 3
+    fileType = TypeNotApplicable
+    componentType = "unsigned int8"
+    pixelType = SCALAR
+    loaderType = NiftiImageIO
+    outputMetaDataStr = "ITK_FileNotes : 
+aux_file : 
+bitpix : 8
+cal_max : 0
+cal_min : 0
+datatype : 2
+descrip : 
+dim[0] : 3
+dim[1] : 124
+dim[2] : 115
+dim[3] : 183
+dim[4] : 1
+dim[5] : 1
+dim[6] : 1
+dim[7] : 1
+dim_info : 
+intent_code : 0
+intent_name : 
+intent_p1 : 0
+intent_p2 : 0
+intent_p3 : 0
+pixdim[0] : 1
+pixdim[1] : 0.3
+pixdim[2] : 0.3
+pixdim[3] : 0.3
+pixdim[4] : 0
+pixdim[5] : 0
+pixdim[6] : 0
+pixdim[7] : 0
+qform_code : 1
+qoffset_x : -38.1513
+qoffset_y : 29.1012
+qoffset_z : -52.353
+quatern_b : 0
+quatern_c : -0
+quatern_d : 0
+scl_inter : 0
+scl_slope : 0
+sform_code : 1
+slice_code : 
+slice_duration : 0
+slice_end : 0
+slice_start : 0
+srow_x : 0.3 -0 -0 -38.1513
+srow_y : -0 0.3 -0 29.1012
+srow_z : 0 0 0.3 -52.353
+toffset : 0
+vox_offset : 3232
+xyzt_units : 
+"
+    suppressErrorPosting = FALSE
+    unresolvedFileName = $(HOME)/graham/scratch/MSTRCHT_BIDSify/derivatives/angiography/sub-01/anat/segmentation/lh/ToF_Ved_Thr_clean.nii.gz
+  }
+}
+module Scale {
+  internal  {
+    frame = "513 700 152 72"
+    moduleGroupName = Preprocessing
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "831 395 256 349"
+        sizeHint = "256 349"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = Scale
+    inputMin = 11
+    inputMax = 1513
+    updateMode = AutoUpdateMinMaxOn
+    useTrueRange = TRUE
+    typeSelect = Automatic
+    outputMin = 0
+    outputMax = 100
+  }
+}
+connections  {
+  SoOrientationInset.children = SoOrientationModel.self
+  SoShadowCast.children = SoVascularSystem.self
+  SoView2DOverlay.image = RegionGrowing.output0
+  SoVascularSystem.inputGraph = DtfSkeletonization.outBase1
+  DtfSkeletonization.input0 = RegionGrowing.output1
+  RegionGrowing.input0 = IntervalThreshold.output0
+  RegionGrowing.inMarkerList = MarkerEditor.outXMarkerList
+  2DView.inImage = IntervalThreshold.output0
+  2DView.inInvPreLUT = MarkerEditor.self
+  2DView.inInvPostLUT = SoView2DOverlay.self
+  View2D.inImage = Scale.output0
+  View2D.inInvPreLUT = SoView2DOverlay.self
+  IntervalThreshold.input0 = Scale.output0
+  WEMSave.inWEM = WEMVascularSystem.outWEM
+  WEMVascularSystem.inputGraph = DtfSkeletonization.outBase1
+  SoWEMRenderer.inWEM = WEMVascularSystem.outWEM
+  SoExaminerViewer.children = "SoWEMRenderer.self SoBackground.self SoShadowCast.self SoOrientationInset.self"
+  MIP.image = IntervalThreshold.output0
+  itkImageFileWriter.input0 = Voxelize_scale_1.output0
+  Voxelize_scale_1.input0 = TOF.output0
+  Voxelize_scale_1.inWEM = WEMVascularSystem1.outWEM
+  WEMVascularSystem1.inputGraph = DtfSkeletonization.outBase1
+  itkImageFileWriter1.input0 = Voxelize_scale_0p7.output0
+  Voxelize_scale_0p7.input0 = TOF.output0
+  Voxelize_scale_0p7.inWEM = WEMVascularSystem.outWEM
+  Scale.input0 = TOF.output0
+}
+networkModel  {
+  parentItems  {
+    0  {
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 63
+        objectName = "Vessel reconstruction"
+        parentUniqueId = 0
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNoteItem {
+        uniqueId = 109
+        objectName = ""
+        parentUniqueId = 0
+        frame = "-317 390 736 87"
+        backgroundColor  {
+          r = 252
+          g = 242
+          b = 2
+          a = 255
+        }
+        text = ":show-module-in-network:`TOF` /home/ROBARTS/rhaast/graham/scratch/MSTRCHT_BIDSify/derivatives/angiography/sub-01/anat/preprocessing/sub-01_acq-TOF_AVG_angio_0p3ISO_reg-to-hires_Warped_rhHippo_N4.nii.gz"
+        richText = "*<html>
+  <head>
+    <style type="text/css">
+      a.headerlink {
+        visibility: hidden;
+      }
+      table {
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+
+  <p><a class="reference internal" href="mlab-show-module-in-network:///#TOF" title="TOF"><code class="xref mlab mlab-show-module-in-network docutils literal"><span class="pre">TOF</span></code></a> /home/ROBARTS/rhaast/graham/scratch/MSTRCHT_BIDSify/derivatives/angiography/sub-01/anat/preprocessing/sub-01_acq-TOF_AVG_angio_0p3ISO_reg-to-hires_Warped_rhHippo_N4.nii.gz</p>
+
+
+  </body>
+</html>*"
+        titleText = "Input file path"
+        isCollapsed = False
+        drawAsComment = False
+        titleFrame = "-312 395 726 22"
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 106
+        objectName = "Vessel visualization"
+        parentUniqueId = 0
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 161
+        objectName = Export
+        parentUniqueId = 0
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+      MLABNetworkModelItem MLABNetworkModelItemGroup {
+        uniqueId = 201
+        objectName = Preprocessing
+        parentUniqueId = 0
+        color  {
+          r = 45
+          g = 226
+          b = 226
+          a = 40
+        }
+      }
+    }
+  }
+}

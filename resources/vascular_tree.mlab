@@ -1,0 +1,297 @@
+// MDL v1 utf8
+mevislabVersion = 3.3
+network  {
+  watchlist = ""
+}
+module itkImageFileReader {
+  internal  {
+    frame = "293 589 136 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "794 307 314 423"
+        sizeHint = "314 423"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = itkImageFileReader
+    fileDataType = int16
+    autoDetermineDataType = FALSE
+    correctSubVoxelShift = TRUE
+    fileDimension = 3
+    info = "Loading okay."
+    numDims = 3
+    fileType = TypeNotApplicable
+    componentType = float
+    pixelType = SCALAR
+    loaderType = NiftiImageIO
+    outputMetaDataStr = "ITK_FileNotes : FSL5.0
+aux_file : 
+bitpix : 32
+cal_max : 0
+cal_min : 0
+datatype : 16
+descrip : FSL5.0
+dim[0] : 3
+dim[1] : 128
+dim[2] : 256
+dim[3] : 128
+dim[4] : 1
+dim[5] : 1
+dim[6] : 1
+dim[7] : 1
+dim_info : 
+intent_code : 0
+intent_name : 
+intent_p1 : 0
+intent_p2 : 0
+intent_p3 : 0
+pixdim[0] : -1
+pixdim[1] : 0.3
+pixdim[2] : 0.3
+pixdim[3] : 0.3
+pixdim[4] : 0
+pixdim[5] : 0
+pixdim[6] : 0
+pixdim[7] : 0
+qform_code : 2
+qoffset_x : 41.5
+qoffset_y : -50.5
+qoffset_z : -31.5
+quatern_b : 0
+quatern_c : 1
+quatern_d : 0
+scl_inter : 0
+scl_slope : 1
+sform_code : 1
+slice_code : 
+slice_duration : 0
+slice_end : 0
+slice_start : 0
+srow_x : -0.3 -0 0 41.5
+srow_y : -0 0.3 -0 -50.5
+srow_z : 0 0 0.3 -31.5
+toffset : 0
+vox_offset : 352
+xyzt_units : 
+
+"
+    suppressErrorPosting = FALSE
+    unresolvedFileName = $(HOME)/graham/scratch/HPC_perfusion/results/vasculature/sub-01/R/vessel_seg_1p0_bin.nii.gz
+  }
+}
+module DtfSkeletonization {
+  internal  {
+    frame = "329 413 160 56"
+    moduleGroupName = ""
+    showNetworkPanel = true
+    windows  {
+      window _default {
+        geometry = "233 422 366 320"
+        sizeHint = "363 320"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = DtfSkeletonization
+    updateSkeletonGraph = TRUE
+    compileGraphVoxels = FALSE
+    objectMinValue = 1
+    cavityVolume = 10
+    maxDistance = 10000
+    useMaxDistance = FALSE
+    autoUpdateMode = Off
+    skeletonOnly = TRUE
+  }
+}
+module View2D {
+  internal  {
+    frame = "205 413 120 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "421 208 400 400"
+        sizeHint = "400 400"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = View2D
+    inventorInputOn = TRUE
+    inventorOutputOn = FALSE
+    view2DExtensionsOn = TRUE
+    startSlice = 65
+    numSlices = 1
+    numXSlices = 1
+    sliceStep = 1
+    slab = 1
+    blendMode = BLEND_REPLACE
+    timePoint = 0
+    maxTimePoint = 0
+    filterMode = FILTER_LINEAR
+    standardKeys = TRUE
+    cineMode = CINE_ZT
+    cineDirection = CINE_FORWARD
+    cineRepeat = CINE_ONCE
+    cineSpeed = 0.1
+    cineAlwaysReset = TRUE
+    snapToCenter = TRUE
+    zoomMode = VIEW2D_AUTO_ZOOM
+    unzoomOnImageChange = FALSE
+    sliceZoom = 1
+    sliceZoomSynced = 1
+    baseColor = "1 1 1"
+    margin = "2 2"
+    sliceOrigin = "0 0"
+    useShaders = TRUE
+    useManagedInteraction = FALSE
+    lutCenter = 0.5
+    lutWidth = 1
+    annotationOn = TRUE
+    annotationMode = ANNO_MODE_AUTO
+    annotationSizeMode = ANNO_SHOW_DETAILED
+    annotationCol = "0.899999976158142 0.899999976158142 0.899999976158142"
+    annotationFontSize = ANNO_SIZE_AUTO
+    annoCoords = Voxel
+    annoCTValue = AsIs
+    borderOn = FALSE
+    borderColor = "0.899999976158142 0.899999976158142 0.899999976158142"
+    valueHighPrecision = TRUE
+    showColorChannelValues = FALSE
+    colorChannelSeparator = " / "
+    maxPrecision = 4
+    enableSlicing = TRUE
+    useRelativeLUTIfNoInputImage = TRUE
+  }
+}
+module GraphViewer {
+  internal  {
+    frame = "421 301 104 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "251 114 1483 863"
+        sizeHint = "832 521"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = GraphViewer
+    showDetails = TRUE
+    rootNodes = TRUE
+    branchNodes = TRUE
+    endNodes = TRUE
+    nodeSize = 0.59999979
+    showNodeIds = TRUE
+    nonCyclicEdges = TRUE
+    cyclicEdges = TRUE
+    arrowHeadSize = 0.2999998
+    arrowLineSize = 0.1
+    showEdgeIds = TRUE
+    height = 0.78539819
+    position = "77.7223663330078 43.8928451538086 59.3611946105957"
+    orientation = "0.0941657721996307 0.806960344314575 0.583050429821014 1.22581303119659"
+    nearDistance = 84.677231
+    farDistance = 167.17296
+    focalDistance = 125.884
+  }
+}
+module SaveBase {
+  internal  {
+    frame = "325 297 88 64"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "1012 480 563 207"
+        sizeHint = "563 207"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WriteXML
+    nodeName = Graph
+    filename = /home/ROBARTS/rhaast/graham/scratch/HPC_perfusion/results/vasculature/sub-01/R/vascular_tree_test.xml
+    useBaseDir = FALSE
+    baseDir = ""
+    format = XML
+    autoSave = FALSE
+    allowOverwrite = TRUE
+  }
+}
+module SubImage {
+  internal  {
+    frame = "317 501 88 56"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "827 255 440 535"
+        sizeHint = "440 535"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = SubImage
+    boxInput = "0 0 0 0 0 0 -1 -1 -1 -1 -1 -1"
+    autoApplyBox = FALSE
+    correctForNegativeSubImageExtents = FALSE
+    enableBoxClamping = FALSE
+    x = -1
+    sx = 1
+    modifyX = TRUE
+    y = -1
+    sy = 1
+    modifyY = TRUE
+    z = -1
+    sz = 1
+    modifyZ = TRUE
+    c = 0
+    sc = -1
+    modifyC = FALSE
+    t = 0
+    st = -1
+    modifyT = FALSE
+    u = 0
+    su = -1
+    modifyU = FALSE
+    fillValue = 0
+    mode = VoxelStartEndOffset
+    autoApply = FALSE
+  }
+}
+module itkImageFileWriter {
+  internal  {
+    frame = "185 297 128 64"
+    moduleGroupName = ""
+    windows  {
+      window _default {
+        geometry = "810 282 348 412"
+        sizeHint = "283 412"
+        wasOpen = no
+      }
+    }
+  }
+  fields  {
+    instanceName = WriteNII
+    useCompression = TRUE
+    correctSubVoxelShift = TRUE
+    forceDirectionCosineWrite = FALSE
+    outputVoxelType = Automatic
+    info = "File saved successfully"
+    unresolvedFileName = $(HOME)/graham/scratch/HPC_perfusion/results/vasculature/sub-01/R/vascular_tree_centerline.nii.gz
+  }
+}
+connections  {
+  DtfSkeletonization.input0 = SubImage.output0
+  View2D.inImage = SubImage.output0
+  WriteXML.inObject = DtfSkeletonization.outBase1
+  SubImage.input0 = itkImageFileReader.output0
+  WriteNII.input0 = DtfSkeletonization.output0
+}
+networkModel = ""
