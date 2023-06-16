@@ -11,7 +11,7 @@ that can be found here.
 - `results/surface_maps` contains group-averaged surface maps as displayed in the manuscript figures. 
 - A more interactive visualization tool of the results is possible using our online data explorer that can be accessed [here](https://tinyurl.com/3z8czuy9/).
 
-![Hippocampal Data Explorer](HippocampalDataExplorer.png?raw=true "Hippocampal Data Explorer")
+![Hippocampal Data Explorer](HippocampalDataExplorer.jpg?raw=true "Hippocampal Data Explorer")
 
 #### Dependencies
 - Singularity and containers (see `config/config.yml`)
