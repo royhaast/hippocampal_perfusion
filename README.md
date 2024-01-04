@@ -21,4 +21,4 @@ that can be found here.
     - [HippUnfold](https://hippunfold.readthedocs.io/)
 
 **Note**
-Raw imaging data, manual segmentations as well as the related code for the image preprocessing steps will be uploaded to a separate data repository after the manuscript has been peer reviewed.
+Raw imaging data, manual segmentations as well as the related code for the image preprocessing steps will be uploaded to a separate data repository after the data manuscript has been accepted for publication.
