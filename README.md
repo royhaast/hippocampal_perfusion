@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/649706083.svg)](https://zenodo.org/doi/10.5281/zenodo.10644516)
 ## Hippocampal perfusion
 
 This repository contains the data analysis code and (visualization) notebooks related to the preprint:
