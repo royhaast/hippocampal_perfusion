@@ -5,7 +5,7 @@ This repository contains the data analysis code and (visualization) notebooks re
 
 > "Novel insights into hippocampal perfusion using high-resolution, multi-modal 7T MRI"
 
-that can be found here.
+that can be found [here](https://doi.org/10.1073/pnas.2310044121).
 
 - The analysis pipeline (see `workflow` for more details) is build using the [Snakemake](https://snakemake.readthedocs.io/en/stable/) workflow management system.
 - Several `notebooks` are uploaded to support the inspection of the intermediate analysis steps (i.e., hippocampal segmentation and vasculature), as well as the different visualization steps (in `visualization`).
