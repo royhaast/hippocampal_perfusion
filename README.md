@@ -1,9 +1,9 @@
 [![DOI](https://zenodo.org/badge/649706083.svg)](https://zenodo.org/doi/10.5281/zenodo.10644516)
 ## Hippocampal perfusion
 
-This repository contains the data analysis code and (visualization) notebooks related to the preprint:
+This repository contains the data analysis code and (visualization) notebooks related to the paper:
 
-> "Novel insights into hippocampal perfusion using high-resolution, multi-modal 7T MRI"
+> "Insights into hippocampal perfusion using high-resolution, multi-modal 7T MRI"
 
 that can be found [here](https://doi.org/10.1073/pnas.2310044121).
 
